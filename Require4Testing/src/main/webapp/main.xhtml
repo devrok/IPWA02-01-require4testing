@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>Require4Testing - Main</title>
+</h:head>
+<h:body>
+	<h1>Main</h1>
+	<h2>
+		<h:outputText value="Hallo, #{mainController.currentUser.username}!" />
+	</h2>
+	<h:outputText
+		value="Du bist angemeldet mit der Rolle '#{mainController.currentUser.rollenBezeichnung}'." />
+	<h:form>
+
+		<h:panelGroup
+			rendered="#{mainController.currentUser.isRequirementEngineer()}">
+			<h3>Main View - Requirement Engineer</h3>
+			<div class="button-bar">
+				<p:commandButton styleClass="pf-btn" ajax="false" immediate="true"
+					value="Anforderungen verwalten"
+					action="#{mainController.anforderungen()}" />
+			</div>
+		</h:panelGroup>
+
+		<h:panelGroup rendered="#{mainController.currentUser.isTestManager()}">
+			<h3>Main View - Testmanager:in</h3>
+			<div class="button-bar">
+				<p:commandButton styleClass="pf-btn" ajax="false" immediate="true"
+					value="Testläufe verwalten" action="#{mainController.testlaeufe()}" />
+
+				<p:commandButton styleClass="pf-btn" ajax="false" immediate="true"
+					value="Testlaufdurchführungen verwalten"
+					action="#{mainController.testlaufDurchfuehrungen()}" />
+			</div>
+			
+		</h:panelGroup>
+
+		<h:panelGroup
+			rendered="#{mainController.currentUser.isTestFallErsteller()}">
+			<h3>Main View - Testfallersteller:in</h3>
+			<div class="button-bar">
+				<p:commandButton styleClass="pf-btn" ajax="false" immediate="true"
+					value="Testfälle verwalten" action="#{mainController.testfaelle()}" />
+			</div>
+		</h:panelGroup>
+
+		<h:panelGroup rendered="#{mainController.currentUser.isTester()}">
+			<h3>Main View - Tester:in</h3>
+			<div class="button-bar">
+				<p:commandButton styleClass="pf-btn" ajax="false" immediate="true"
+					value="Testfallergebnis eintragen"
+					action="#{mainController.testfallDurchfuehrungen()}" />
+			</div>
+		</h:panelGroup>
+
+		<div class="button-bar">
+			<p:commandButton styleClass="pf-btn" ajax="false" value="Logout"
+				action="#{mainController.logout()}" immediate="true" />
+		</div>
+	</h:form>
+
+</h:body>
+</html>

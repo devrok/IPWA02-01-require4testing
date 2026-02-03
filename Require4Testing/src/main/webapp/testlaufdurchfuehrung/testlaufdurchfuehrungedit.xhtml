@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>Testlauf verwalten</title>
+</h:head>
+<h:body>
+	<f:metadata>
+		<f:viewParam name="id"
+			value="#{testlaufDurchfuehrungEditController.id}" />
+		<f:viewAction action="#{testlaufDurchfuehrungEditController.load}" />
+	</f:metadata>
+	<h1>Testlauf verwalten</h1>
+	<h:outputText value="#{testlaufDurchfuehrungEditController.item.id}"></h:outputText>
+
+	<h:form>
+
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Id:" for="id" />
+			<h:outputLabel id="id"
+				value="#{testlaufDurchfuehrungEditController.item.id}" size="40" />
+
+			<h:outputLabel value="Testlauf" for="testlauf" />
+			<h:selectOneMenu id="testlauf"
+				value="#{testlaufDurchfuehrungEditController.testlaufId}">
+				<f:selectItem itemLabel="none" itemValue="#{null}"
+					noSelectionOption="true" />
+				<f:selectItems
+					value="#{testlaufDurchfuehrungEditController.testlaeufe}"
+					var="testlauf" itemLabel="#{testlauf.titel}"
+					itemValue="#{testlauf.id}" />
+			</h:selectOneMenu>
+
+			<h:outputLabel value="Tester:in" for="testerin" />
+			<h:selectOneMenu id="testerin"
+				value="#{testlaufDurchfuehrungEditController.testerinId}">
+				<f:selectItem itemLabel="none" itemValue="#{null}"
+					noSelectionOption="true" />
+				<f:selectItems
+					value="#{testlaufDurchfuehrungEditController.testerinnen}"
+					var="testerin" itemLabel="#{testerin.name}"
+					itemValue="#{testerin.id}" />
+			</h:selectOneMenu>
+
+			<h:outputLabel value="Kommentar:" for="kommentar" />
+			<h:inputText id="kommentar"
+				value="#{testlaufDurchfuehrungEditController.item.kommentar}"
+				size="100" />
+
+			<h:outputLabel value="Testfälle" />
+
+			<p:pickList
+				value="#{testlaufDurchfuehrungEditController.testfallModel}"
+				var="testfall" itemLabel="#{testfall.titel}" itemValue="#{testfall}"
+				converter="testfallConverter" />
+
+
+		</h:panelGrid>
+		<div class="button-bar">
+			<p:commandButton styleClass="pf-btn" value="Save"
+				action="#{testlaufDurchfuehrungEditController.save()}" />
+			<p:commandButton styleClass="pf-btn" value="Cancel"
+				action="#{testlaufDurchfuehrungEditController.cancel()}"
+				immediate="true" />
+		</div>
+	</h:form>
+
+</h:body>
+</html>

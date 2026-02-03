@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>Testfall verwalten</title>
+</h:head>
+<h:body>
+	<f:metadata>
+		<f:viewParam name="id" value="#{testfallEditController.id}" />
+		<f:viewAction action="#{testfallEditController.load}" />
+	</f:metadata>
+	<h1>Testfall verwalten</h1>
+	<h:outputText value="#{testfallEditController.item.id}"></h:outputText>
+
+	<h:form>
+
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Id:" for="id" />
+			<h:outputLabel id="id" value="#{testfallEditController.item.id}"
+				size="40" />
+
+			<h:outputLabel value="Anforderung" for="anforderung" />
+			<h:selectOneMenu id="anforderung"
+				value="#{testfallEditController.anforderungId}">
+				<f:selectItem itemLabel="none" itemValue="#{null}"
+					noSelectionOption="true" />
+				<f:selectItems value="#{testfallEditController.anforderungen}"
+					var="anforderung" itemLabel="#{anforderung.titel}"
+					itemValue="#{anforderung.id}" />
+			</h:selectOneMenu>
+
+			<h:outputLabel value="Titel:" for="titel" />
+			<h:inputText id="titel" value="#{testfallEditController.item.titel}"
+				size="40" />
+
+			<h:outputLabel value="Beschreibung" for="beschreibung" />
+			<h:inputText id="beschreibung"
+				value="#{testfallEditController.item.beschreibung}" size="100" />
+
+		</h:panelGrid>
+
+		<h:messages showDetail="true" showSummary="true" />
+
+		<div class="button-bar">
+			<p:commandButton styleClass="pf-btn" value="Save"
+				action="#{testfallEditController.save()}" />
+			<p:commandButton styleClass="pf-btn" value="Cancel"
+				action="#{testfallEditController.cancel()}" immediate="true" />
+		</div>
+	</h:form>
+
+</h:body>
+</html>

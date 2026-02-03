@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>Übersicht Anforderung</title>
+</h:head>
+<h:body>
+	<h1>Übersicht Anforderungen</h1>
+
+	<h:form>
+
+		<div class="button-bar">
+			<p:button styleClass="pf-btn" outcome="/main" icon="pi pi-home"	title="Zur Startseite" />
+			<p:button styleClass="pf-btn" outcome="anforderungedit" icon="pi pi-plus-circle" title="Neue Anforderung erstellen" />
+		</div>		
+		 
+		<p:dataTable var="anforderung" value="#{anforderungListeController.items}">
+
+			<p:column headerText="ID" styleClass="size-to-content">#{anforderung.id}</p:column>
+
+			<p:column headerText="Titel" styleClass="size-to-content">#{anforderung.titel}</p:column>
+
+			<p:column headerText="Beschreibung">#{anforderung.beschreibung}</p:column>
+		
+			<p:column headerText="" styleClass="size-to-content">
+				<h:commandLink id="deleteLink" action="#{anforderungListeController.remove(anforderung.id)}" styleClass="icon-link">
+				<i class="pi pi-trash"></i>
+				<p:tooltip for="deleteLink" value="Löschen" />
+				</h:commandLink>
+			</p:column>
+
+			<p:column headerText="" styleClass="size-to-content">
+				<h:link id="editLink" outcome="anforderungedit" styleClass="icon-link">
+					<f:param name="id" value="#{anforderung.id}" />
+					<i class="pi pi-pencil"></i>
+					<p:tooltip for="editLink" value="Bearbeiten" />
+				</h:link>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

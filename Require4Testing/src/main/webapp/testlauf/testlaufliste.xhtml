@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>Übersicht Testläufe</title>
+</h:head>
+<h:body>
+	<h1>Übersicht Testläufe</h1>
+
+	<h:form>
+
+		<div class="button-bar">
+			<p:button styleClass="pf-btn" outcome="/main" icon="pi pi-home" title="Zur Startseite" />
+			<p:button styleClass="pf-btn" outcome="testlaufedit" icon="pi pi-plus-circle" title="Neuen Testlauf erstellen" />
+		</div>
+		
+		<p:dataTable var="testlauf" value="#{testlaufListeController.items}">
+
+			<p:column headerText="ID" styleClass="size-to-content">#{testlauf.id}</p:column>
+
+			<p:column headerText="Titel" styleClass="size-to-content">#{testlauf.titel}</p:column>
+
+			<p:column headerText="Beschreibung">#{testlauf.beschreibung}</p:column>
+
+			<p:column headerText="" styleClass="size-to-content">
+				<h:commandLink id="deleteLink"
+					action="#{testlaufListeController.remove(testlauf.id)}"
+					styleClass="icon-link">
+					<i class="pi pi-trash"></i>
+					<p:tooltip for="deleteLink" value="Löschen" />
+				</h:commandLink>
+			</p:column>
+
+			<p:column headerText="" styleClass="size-to-content">
+				<h:link id="editLink" outcome="testlaufedit" styleClass="icon-link">
+					<f:param name="id" value="#{testlauf.id}" />
+					<i class="pi pi-pencil"></i>
+					<p:tooltip for="editLink" value="Bearbeiten" />
+				</h:link>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,72 @@
+package entities;
+
+import java.io.Serializable;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+
+@Entity
+public class Testlauf implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id = 0L;
+	private String titel;
+	private String beschreibung;
+
+//	@ManyToOne(optional = true)
+//	private Benutzer testerin;
+
+	// TODO: Testfaelle
+
+	public Testlauf() {
+
+	}
+
+	public Testlauf(Long id, String titel, String beschreibung) {
+		this.setId(id);
+		this.setTitel(titel);
+		this.setBeschreibung(beschreibung);
+	}
+
+	public String getBeschreibung() {
+		return beschreibung;
+	}
+
+	public void setBeschreibung(String beschreibung) {
+		this.beschreibung = beschreibung;
+	}
+
+	public String getTitel() {
+		return titel;
+	}
+
+	public void setTitel(String titel) {
+		this.titel = titel;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Testlauf clone() {
+		Testlauf clone = new Testlauf(this.id, this.titel, this.beschreibung);
+//		clone.setTesterin(this.testerin);
+		return clone;
+	}
+//
+//	public Benutzer getTesterin() {
+//		return testerin;
+//	}
+//
+//	public void setTesterin(Benutzer testerin) {
+//		this.testerin = testerin;
+//	}
+}

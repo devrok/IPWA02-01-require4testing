@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>Testfalldurchfuehrung verwalten</title>
+</h:head>
+<h:body>
+	<f:metadata>
+		<f:viewParam name="id" value="#{testfallDurchfuehrungEditController.id}" />
+		<f:viewAction action="#{testfallDurchfuehrungEditController.load}" />
+	</f:metadata>
+	<h1>Testfalldurchfuehrung verwalten verwalten</h1>
+	<h:outputText value="#{testfallDurchfuehrungEditController.item.id}"></h:outputText>
+
+	<h:form>
+
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Id:" for="id" />
+			<h:outputLabel id="id" value="#{testfallDurchfuehrungEditController.item.id}"
+				size="40" />
+
+			<h:outputLabel value="Titel:" for="titel" />
+			<h:inputText id="titel"
+				value="#{testfallDurchfuehrungEditController.item.testfall.titel}" size="40" />
+
+			<h:outputLabel value="Ergebnis:" for="ergebnis1" />
+			<h:inputText id="ergebnis1"
+				value="#{testfallDurchfuehrungEditController.item.ergebnis}" size="40" />
+				
+			<h:outputLabel value="Ergebnis:" for="ergebnis" />
+			<p:selectOneMenu id="ergebnis"
+				value="#{testfallDurchfuehrungEditController.item.ergebnis}">
+
+				<f:selectItems
+					value="#{testfallDurchfuehrungEditController.ergebnisStatusValues}"
+					var="status" itemValue="#{status}" itemLabel="#{status.label}" />
+			</p:selectOneMenu>
+
+			<h:outputLabel value="Kommentar:" for="kommentar" />
+			<h:inputText id="kommentar"
+				value="#{testfallDurchfuehrungEditController.item.kommentar}" size="100" />
+
+		</h:panelGrid>
+
+		<div class="button-bar">
+			<p:commandButton styleClass="pf-btn" value="Save"
+				action="#{testfallDurchfuehrungEditController.save()}" />
+			<p:commandButton styleClass="pf-btn" value="Cancel"
+				action="#{testfallDurchfuehrungEditController.cancel()}" immediate="true" />
+		</div>
+	</h:form>
+
+</h:body>
+</html>

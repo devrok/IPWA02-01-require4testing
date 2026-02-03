@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>Anforderung verwalten</title>
+</h:head>
+<h:body>
+	<f:metadata>
+		<f:viewParam name="id" value="#{anforderungEditController.id}" />
+		<f:viewAction action="#{anforderungEditController.load}" />
+	</f:metadata>
+	<h1>Anforderung verwalten</h1>
+	<h:outputText value="#{eanforderungEditController.item.id}"></h:outputText>
+
+	<h:form>
+
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Id:" for="id" />
+			<h:outputLabel id="id" value="#{anforderungEditController.item.id}"
+				size="40" />
+
+			<h:outputLabel value="Titel:" for="titel" />
+			<h:inputText id="titel"
+				value="#{anforderungEditController.item.titel}" size="40" />
+
+			<h:outputLabel value="Beschreibung" for="beschreibung" />
+			<h:inputText id="beschreibung"
+				value="#{anforderungEditController.item.beschreibung}" size="100" />
+
+		</h:panelGrid>
+
+		<div class="button-bar">
+			<p:commandButton styleClass="pf-btn" value="Save"
+				action="#{anforderungEditController.save()}" />
+			<p:commandButton styleClass="pf-btn" value="Cancel"
+				action="#{anforderungEditController.cancel()}" immediate="true" />
+		</div>
+	</h:form>
+
+</h:body>
+</html>
