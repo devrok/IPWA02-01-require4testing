@@ -17,15 +17,15 @@
 			<p:button styleClass="pf-btn" outcome="testlaufedit" icon="pi pi-plus-circle" title="Neuen Testlauf erstellen" />
 		</div>
 		
-		<p:dataTable var="testlauf" value="#{testlaufListeController.items}">
+		<p:dataTable var="testlauf" value="#{testlaufListeController.items}" stripedRows="true" resizableColumns="true" showGridlines="true">
 
-			<p:column headerText="ID" styleClass="size-to-content">#{testlauf.id}</p:column>
+			<p:column headerText="ID" styleClass="size-to-content01">#{testlauf.id}</p:column>
 
-			<p:column headerText="Titel" styleClass="size-to-content">#{testlauf.titel}</p:column>
+			<p:column headerText="Titel">#{testlauf.titel}</p:column>
 
 			<p:column headerText="Beschreibung">#{testlauf.beschreibung}</p:column>
 
-			<p:column headerText="" styleClass="size-to-content">
+			<p:column headerText="" styleClass="size-to-content01">
 				<h:commandLink id="deleteLink"
 					action="#{testlaufListeController.remove(testlauf.id)}"
 					styleClass="icon-link">
@@ -34,7 +34,7 @@
 				</h:commandLink>
 			</p:column>
 
-			<p:column headerText="" styleClass="size-to-content">
+			<p:column headerText="" styleClass="size-to-content01">
 				<h:link id="editLink" outcome="testlaufedit" styleClass="icon-link">
 					<f:param name="id" value="#{testlauf.id}" />
 					<i class="pi pi-pencil"></i>

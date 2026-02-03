@@ -13,31 +13,39 @@
 	<h:form>
 
 		<div class="button-bar">
-			<p:button styleClass="pf-btn" outcome="/main" icon="pi pi-home" title="Zur Startseite" />
-			<p:button styleClass="pf-btn" outcome="testlaufdurchfuehrungedit" icon="pi pi-plus-circle" title="Neue Testlaufdurchfuehrung erstellen" />
+			<p:button styleClass="pf-btn" outcome="/main" icon="pi pi-home"
+				title="Zur Startseite" />
+			<p:button styleClass="pf-btn" outcome="testlaufdurchfuehrungedit"
+				icon="pi pi-plus-circle"
+				title="Neue Testlaufdurchfuehrung erstellen" />
 		</div>
-				 
-		<p:dataTable var="testlaufDurchfuehrung" value="#{testlaufDurchfuehrungListeController.items}">
 
-			<p:column headerText="ID" styleClass="size-to-content">#{testlaufDurchfuehrung.id}</p:column>
+		<p:dataTable var="testlaufDurchfuehrung"
+			value="#{testlaufDurchfuehrungListeController.items}"
+			stripedRows="true" resizableColumns="true" showGridlines="true">
 
-			<p:column headerStyleClass="size-to-content" headerText="Testlauf" styleClass="size-to-content">#{testlaufDurchfuehrung.testlauf.titel}</p:column>
+			<p:column headerText="ID" styleClass="size-to-content01">#{testlaufDurchfuehrung.id}</p:column>
 
-			<p:column headerStyleClass="size-to-content" headerText="Tester" styleClass="size-to-content">#{testlaufDurchfuehrung.testerin.name}</p:column>
-			
+			<p:column headerText="Testlauf">#{testlaufDurchfuehrung.testlauf.titel}</p:column>
+
+			<p:column headerText="Tester">#{testlaufDurchfuehrung.testerin.name}</p:column>
+
 			<p:column headerText="Kommentar">#{testlaufDurchfuehrung.kommentar}</p:column>
-			
+
 			<p:column headerText="Testfalldurchfuehrungen">#{testlaufDurchfuehrung.testfallDurchfuehrungen.size()}</p:column>
-		
+
 			<p:column headerText="" styleClass="size-to-content">
-				<h:commandLink id="deleteLink" action="#{testlaufDurchfuehrungListeController.remove(testlaufDurchfuehrung.id)}" styleClass="icon-link">
-				<i class="pi pi-trash"></i>
-				<p:tooltip for="deleteLink" value="Löschen" />
+				<h:commandLink id="deleteLink"
+					action="#{testlaufDurchfuehrungListeController.remove(testlaufDurchfuehrung.id)}"
+					styleClass="icon-link">
+					<i class="pi pi-trash"></i>
+					<p:tooltip for="deleteLink" value="Löschen" />
 				</h:commandLink>
 			</p:column>
 
-			<p:column headerText="" styleClass="size-to-content">
-				<h:link id="editLink" outcome="testlaufdurchfuehrungedit" styleClass="icon-link">
+			<p:column headerText="" styleClass="size-to-content01">
+				<h:link id="editLink" outcome="testlaufdurchfuehrungedit"
+					styleClass="icon-link">
 					<f:param name="id" value="#{testlaufDurchfuehrung.id}" />
 					<i class="pi pi-pencil"></i>
 					<p:tooltip for="editLink" value="Bearbeiten" />
