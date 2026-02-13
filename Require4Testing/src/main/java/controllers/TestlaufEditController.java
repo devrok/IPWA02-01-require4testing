@@ -7,6 +7,7 @@ import daos.BenutzerDAO;
 import daos.TestlaufDAO;
 import entities.Anforderung;
 import entities.Benutzer;
+import entities.TestfallDurchfuehrung;
 import entities.Testlauf;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
@@ -34,7 +35,6 @@ public class TestlaufEditController implements Serializable {
 	@PostConstruct
 	public void load() {
 		initializeItem();
-//		initializeTester();
 	}
 
 	private void initializeItem() {
@@ -42,21 +42,12 @@ public class TestlaufEditController implements Serializable {
 
 			Testlauf origin = itemDAO.findById(this.id);
 
-			if (origin == null) {
-				this.item = new Testlauf();
-			} else {
-
-				this.item = origin.clone();
-			}
+			this.item = origin != null ? origin : new Testlauf();
 
 		} else {
 			this.item = new Testlauf();
 		}
 	}
-
-//	private void initializeTester() {
-//		testerinnen = benutzerDAO.findByRollenName("Tester:in");
-//	}
 
 	public Testlauf getItem() {
 		return item;
@@ -71,11 +62,6 @@ public class TestlaufEditController implements Serializable {
 	}
 
 	public String save() {
-//		// TODO: noch bei anderen
-//		String testerin = item..getTesterin() == null ? "none" : item.getTesterin().getName();
-//
-//		System.out.println("Save Testfall. Testerin: " + testerin);
-
 		itemDAO.save(item);
 		return "testlaufliste";
 	}
@@ -88,22 +74,4 @@ public class TestlaufEditController implements Serializable {
 		return testerinnen;
 	}
 
-//	public Long getTesterinId() {
-//		if (item.getTesterin() == null) {
-//			testerinId = null;
-//		} else {
-//			testerinId = item.getTesterin().getId();
-//		}
-//
-//		return testerinId;
-//	}
-//
-//	public void setTesterinId(Long testerinId) {
-//		this.testerinId = testerinId;
-//		if (testerinId == null) {
-//			this.item.setTesterin(null);
-//		} else {
-//			this.item.setTesterin(this.benutzerDAO.findById(testerinId));
-//		}
-//	}
 }

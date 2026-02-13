@@ -17,11 +17,6 @@ public class Testlauf implements Serializable {
 	private String titel;
 	private String beschreibung;
 
-//	@ManyToOne(optional = true)
-//	private Benutzer testerin;
-
-	// TODO: Testfaelle
-
 	public Testlauf() {
 
 	}
@@ -55,18 +50,4 @@ public class Testlauf implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Testlauf clone() {
-		Testlauf clone = new Testlauf(this.id, this.titel, this.beschreibung);
-//		clone.setTesterin(this.testerin);
-		return clone;
-	}
-//
-//	public Benutzer getTesterin() {
-//		return testerin;
-//	}
-//
-//	public void setTesterin(Benutzer testerin) {
-//		this.testerin = testerin;
-//	}
 }

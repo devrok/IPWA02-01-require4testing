@@ -56,12 +56,6 @@ public class Testfall implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public Testfall clone() {
-		Testfall clone = new Testfall(this.id, this.titel, this.beschreibung);
-		clone.setAnforderung(this.anforderung);
-		return clone;
-	}
 
 	public Anforderung getAnforderung() {
 		return anforderung;

@@ -13,6 +13,7 @@ import daos.AnforderungDAO;
 import daos.TestfallDAO;
 import entities.Anforderung;
 import entities.Testfall;
+import entities.TestfallDurchfuehrung;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -44,15 +45,9 @@ public class TestfallEditController implements Serializable {
 
 	private void initializeItem() {
 		if (this.id != null) {
-
 			Testfall origin = itemDAO.findById(this.id);
 
-			if (origin == null) {
-				this.item = new Testfall();
-			} else {
-
-				this.item = origin.clone();
-			}
+			this.item = origin != null ? origin : new Testfall();
 
 		} else {
 			this.item = new Testfall();
@@ -60,12 +55,6 @@ public class TestfallEditController implements Serializable {
 	}
 
 	private void initializeAnforderungen() {
-//		anforderungSelectItems = new ArrayList<SelectItem>();
-//		anforderungSelectItems.add(new SelectItem(0, "none"));		
-//		anforderungSelectItems.addAll(anforderungDAO.getAll().stream()
-//	            .map(a -> new SelectItem(a, a.getTitel()))
-//	            .collect(Collectors.toList()));
-//		
 		anforderungen = anforderungDAO.getAll();
 	}
 

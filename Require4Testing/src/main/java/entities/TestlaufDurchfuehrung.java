@@ -63,12 +63,6 @@ public class TestlaufDurchfuehrung {
 		this.testlauf = testlauf;
 	}
 
-	public TestlaufDurchfuehrung clone() {
-		TestlaufDurchfuehrung clone = new TestlaufDurchfuehrung(this.id, this.testlauf, this.testerin, this.kommentar, this.testfallDurchfuehrungen);
-		clone.setTestfallDurchfuehrungen(testfallDurchfuehrungen);
-		return clone;
-	}
-
 	public String getKommentar() {
 		return kommentar;
 	}

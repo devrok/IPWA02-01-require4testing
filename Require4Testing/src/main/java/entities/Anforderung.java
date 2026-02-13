@@ -48,8 +48,4 @@ public class Anforderung implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public Anforderung clone() {
-		return new Anforderung(this.id, this.titel, this.beschreibung);
-	}
 }

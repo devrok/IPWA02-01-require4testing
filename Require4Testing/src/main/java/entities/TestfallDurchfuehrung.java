@@ -79,9 +79,4 @@ public class TestfallDurchfuehrung {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public TestfallDurchfuehrung clone() {
-		TestfallDurchfuehrung clone = new TestfallDurchfuehrung(this.id, this.testlaufDurchfuehrung, this.testfall, this.ergebnis, this.kommentar);
-		return clone;
-	}
 }

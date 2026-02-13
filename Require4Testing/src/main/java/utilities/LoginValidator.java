@@ -39,25 +39,5 @@ public class LoginValidator implements Serializable {
 				}
 			}
 		}
-		
-//		
-//		for(User user: users) {
-//			if (user.getUsername().equals(inputUsername)) {
-//				if(user.getHash().equals(inputHash)) {
-//					
-//					String role = user.getRole();
-//					
-//					System.out.println("##### Rolle: " + role + " #####");
-//
-//					currentUser.setRole(role);
-//				}
-//			}
-//			
-//			if (currentUser.isValid()) {
-//				System.out.println("##### user found! #####");
-//				return;
-//			}
-//		}
-		
 	}
 }

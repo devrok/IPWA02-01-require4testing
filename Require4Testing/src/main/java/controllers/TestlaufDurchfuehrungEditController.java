@@ -33,10 +33,10 @@ public class TestlaufDurchfuehrungEditController implements Serializable {
 
 	@Inject
 	private BenutzerDAO benutzerDAO;
-	
+
 	@Inject
 	private TestlaufDAO testlaufDAO;
-	
+
 	@Inject
 	private TestfallDAO testfallDAO;
 
@@ -46,7 +46,7 @@ public class TestlaufDurchfuehrungEditController implements Serializable {
 	private Collection<Testlauf> testlaeufe;
 	private Long testerinId;
 	private Collection<Benutzer> testerinnen;
-	
+
 	private DualListModel<Testfall> testfallModel;
 
 	public TestlaufDurchfuehrungEditController() {
@@ -63,25 +63,14 @@ public class TestlaufDurchfuehrungEditController implements Serializable {
 
 	private void initializeItem() {
 		if (this.id != null) {
-
 			TestlaufDurchfuehrung origin = itemDAO.findById(this.id);
-			
+
 			this.item = origin != null ? origin : new TestlaufDurchfuehrung();
-
-			// TODO: bei ALLEN Controllern OHNE clone() arbeiten?
-			
-//			if (origin == null) {
-//				this.item = new TestlaufDurchfuehrung();
-//			} else {
-//
-//				this.item = origin.clone();
-//			}
-
 		} else {
 			this.item = new TestlaufDurchfuehrung();
 		}
 	}
-	
+
 	private void initializeTestlaeufe() {
 		setTestlaeufe(testlaufDAO.getAll());
 	}
@@ -91,17 +80,17 @@ public class TestlaufDurchfuehrungEditController implements Serializable {
 	}
 
 	private void initializeTestfaelle() {
-	    List<Testfall> source = new ArrayList<>(testfallDAO.getAll());
-	    List<Testfall> target = new ArrayList<>();
+		List<Testfall> source = new ArrayList<>(testfallDAO.getAll());
+		List<Testfall> target = new ArrayList<>();
 
-	    if (item.getTestfallDurchfuehrungen() != null) {
-	        for (TestfallDurchfuehrung tfd : item.getTestfallDurchfuehrungen()) {
-	            target.add(tfd.getTestfall());
-	        }
-	        source.removeAll(target);
-	    }
+		if (item.getTestfallDurchfuehrungen() != null) {
+			for (TestfallDurchfuehrung tfd : item.getTestfallDurchfuehrungen()) {
+				target.add(tfd.getTestfall());
+			}
+			source.removeAll(target);
+		}
 
-	    setTestfallModel(new DualListModel<>(source, target));
+		setTestfallModel(new DualListModel<>(source, target));
 	}
 
 	public TestlaufDurchfuehrung getItem() {
@@ -116,76 +105,48 @@ public class TestlaufDurchfuehrungEditController implements Serializable {
 		this.id = id;
 	}
 
-//	public String save() {
-//		String testerin = item.getTesterin() == null ? "none" : item.getTesterin().getName();
-//		System.out.println("Save TestlaufDurchfuehrung. Testerin: " + testerin);
-//		
-//		String testlauf = item.getTestlauf() == null ? "none" : item.getTestlauf().getTitel();
-//		System.out.println("Save TestlaufDurchfuehrung. Testlauf: " + testlauf);
-//		
-//		// TODO: ACHTUNG - Testfalldurchfuehrungen mit Ergebnis != NICHT_AUSGEFUEHRT sollten bestehen bleiben!!
-//	    // Alte Zuordnungen verwerfen
-//	    item.getTestfallDurchfuehrungen().clear();
-//
-//	    // Neue TestfallDurchführungen erzeugen
-//	    for (Testfall testfall : getTestfallModel().getTarget()) {
-//	        TestfallDurchfuehrung tfd = new TestfallDurchfuehrung();
-//	        tfd.setTestlaufDurchfuehrung(item);
-//	        tfd.setTestfall(testfall);
-//	        tfd.setErgebnis(TestfallErgebnisStatus.NICHT_AUSGEFUEHRT);
-//	        item.getTestfallDurchfuehrungen().add(tfd);
-//	    }
-//		
-//		itemDAO.save(item);
-//		return "testlaufdurchfuehrungliste";
-//	}
-	
 	public String save() {
 
-	    List<Testfall> selectedTestfaelle = testfallModel.getTarget();
+		List<Testfall> selectedTestfaelle = testfallModel.getTarget();
 
-	    // Bestehende TestfallDurchführungen nach Testfall-ID mappen
-	    Map<Long, TestfallDurchfuehrung> existing = item.getTestfallDurchfuehrungen()
-	        .stream()
-	        .collect(Collectors.toMap(
-	            tfd -> tfd.getTestfall().getId(),
-	            tfd -> tfd
-	        ));
+		// Bestehende TestfallDurchführungen nach Testfall-ID mappen
+		Map<Long, TestfallDurchfuehrung> existing = item.getTestfallDurchfuehrungen().stream()
+				.collect(Collectors.toMap(tfd -> tfd.getTestfall().getId(), tfd -> tfd));
 
-	    // Neue Testfälle hinzufügen
-	    for (Testfall testfall : selectedTestfaelle) {
+		// Neue Testfälle hinzufügen
+		for (Testfall testfall : selectedTestfaelle) {
 
-	        if (!existing.containsKey(testfall.getId())) {
+			if (!existing.containsKey(testfall.getId())) {
 
-	            TestfallDurchfuehrung tfd = new TestfallDurchfuehrung();
-	            tfd.setTestlaufDurchfuehrung(item);
-	            tfd.setTestfall(testfall);
-	            tfd.setErgebnis(TestfallErgebnisStatus.NICHT_AUSGEFUEHRT);
+				TestfallDurchfuehrung tfd = new TestfallDurchfuehrung();
+				tfd.setTestlaufDurchfuehrung(item);
+				tfd.setTestfall(testfall);
+				tfd.setErgebnis(TestfallErgebnisStatus.NICHT_AUSGEFUEHRT);
 
-	            item.getTestfallDurchfuehrungen().add(tfd);
-	        }
-	    }
+				item.getTestfallDurchfuehrungen().add(tfd);
+			}
+		}
 
-	    // Entfernte Testfälle selektiv löschen
-	    Iterator<TestfallDurchfuehrung> it = item.getTestfallDurchfuehrungen().iterator();
+		// Entfernte Testfälle selektiv löschen
+		Iterator<TestfallDurchfuehrung> it = item.getTestfallDurchfuehrungen().iterator();
 
-	    while (it.hasNext()) {
-	        TestfallDurchfuehrung tfd = it.next();
+		while (it.hasNext()) {
+			TestfallDurchfuehrung tfd = it.next();
 
-	        boolean stillSelected = selectedTestfaelle.stream()
-	            .anyMatch(tf -> tf.getId().equals(tfd.getTestfall().getId()));
+			boolean stillSelected = selectedTestfaelle.stream()
+					.anyMatch(tf -> tf.getId().equals(tfd.getTestfall().getId()));
 
-	        if (!stillSelected) {
+			if (!stillSelected) {
 
-	            if (tfd.getErgebnis() == TestfallErgebnisStatus.NICHT_AUSGEFUEHRT) {
-	                it.remove(); // orphanRemoval greift
-	            }
-	            // else: bewusst behalten
-	        }
-	    }
+				if (tfd.getErgebnis() == TestfallErgebnisStatus.NICHT_AUSGEFUEHRT) {
+					it.remove(); // orphanRemoval greift
+				}
+				// else: bewusst behalten
+			}
+		}
 
-	    itemDAO.save(item);
-	    return "testlaufdurchfuehrungliste";
+		itemDAO.save(item);
+		return "testlaufdurchfuehrungliste";
 	}
 
 	public String cancel() {

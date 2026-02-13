@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import daos.AnforderungDAO;
 import entities.Anforderung;
+import entities.TestfallDurchfuehrung;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -25,16 +26,9 @@ public class AnforderungEditController implements Serializable {
 	@PostConstruct
 	public void load() {
 	    if (this.id != null) {
-
 	    	Anforderung origin = itemDAO.findById(this.id);
 	    	
-	    	if (origin == null) {
-	    		this.item = new Anforderung();	
-	    	}
-	    	else  {
-	    	
-	    		this.item = origin.clone();
-	    	}
+	    	this.item = origin != null ? origin : new Anforderung();
 	    	
 	    } else {
 	    	this.item = new Anforderung();

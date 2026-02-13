@@ -190,21 +190,6 @@ public class DatabaseInitializer {
 					testlaufDurchfuehrungDAO.getAll());
 
 			if (dbItems.isEmpty()) {
-//				dbItems.add(new TestlaufDurchfuehrung(
-//							1L,
-//							new Testlauf(1L, "Titel Testlauf 01", "Dies ist eine lange Beschreibung von Testlauf 01, die einfach nicht enden möchte."),
-//							new Benutzer(4L, "tst1", "12345678", new Rolle(4L, "Tester:in")),
-//							"",
-//							new ArrayList<TestfallDurchfuehrung>(Arrays.asList(new TestfallDurchfuehrung())))
-//						);
-//				
-//				dbItems.add(new TestlaufDurchfuehrung(
-//							2L,
-//							new Testlauf(2L, "Titel Testlauf 02", "Dies ist eine lange Beschreibung von Testlauf 02, die einfach nicht enden möchte."),
-//							new Benutzer(4L, "tst1", "12345678", new Rolle(4L, "Tester:in")),
-//							"",
-//							new ArrayList<TestfallDurchfuehrung>(Arrays.asList(new TestfallDurchfuehrung())))
-//						);
 
 				dbItems.add(new TestlaufDurchfuehrung(1L,
 						new Testlauf(1L, "Titel Testlauf 01",
@@ -254,14 +239,6 @@ public class DatabaseInitializer {
 
 			testlaufDurchfuehrungDAO.save(dbItems);
 
-//			Collection<TestfallDurchfuehrung> dbItems = new ArrayList<TestfallDurchfuehrung>(testfallDurchfuehrungDAO.getAll());
-//			
-//			if (dbItems.isEmpty() ) {
-//				
-//				
-//				
-//				testfallDurchfuehrungDAO.save(dbItems);
-//			}
 
 			System.out.println("Erledigt: 'initTestfallDurchfuehrungen'");
 		} catch (Exception e) {
@@ -271,9 +248,7 @@ public class DatabaseInitializer {
 
 	private TestfallDurchfuehrung createTestfallDurchfuehrung(TestlaufDurchfuehrung testlaufDurchfuehrung,
 			Testfall testfall) {
-		// public TestfallDurchfuehrung(Long id, TestlaufDurchfuehrung
-		// testlaufDurchfuehrung, Testfall testfall, TestfallErgebnisStatus ergebnis,
-		// String kommentar) {
+
 		return new TestfallDurchfuehrung(0L, testlaufDurchfuehrung, testfall, TestfallErgebnisStatus.NICHT_AUSGEFUEHRT,
 				"mein Kommentar");
 	}
