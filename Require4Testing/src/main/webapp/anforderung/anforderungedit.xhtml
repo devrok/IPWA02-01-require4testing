@@ -13,10 +13,8 @@
 		<f:viewAction action="#{anforderungEditController.load}" />
 	</f:metadata>
 	<h1>Anforderung verwalten</h1>
-	<h:outputText value="#{eanforderungEditController.item.id}"></h:outputText>
 
 	<h:form>
-
 		<h:panelGrid columns="2">
 			<h:outputLabel value="Id:" for="id" />
 			<h:outputLabel id="id" value="#{anforderungEditController.item.id}"

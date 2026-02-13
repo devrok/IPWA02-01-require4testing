@@ -14,8 +14,6 @@ import jakarta.persistence.EntityTransaction;
 public class TestlaufDurchfuehrungDAO {
 	public TestlaufDurchfuehrung findById(Long id) {
 		EntityManager em = EntityManagerFactoryHelper.createNewEntityManager();
-
-		//TestlaufDurchfuehrung testlaufDurchfuehrung = em.find(TestlaufDurchfuehrung.class, id);
 		
 		TestlaufDurchfuehrung testlaufDurchfuehrung = em.createQuery(
 		        """
@@ -36,9 +34,6 @@ public class TestlaufDurchfuehrungDAO {
 
 	public Collection<TestlaufDurchfuehrung> getAll() {
 		EntityManager em = EntityManagerFactoryHelper.createNewEntityManager();
-
-		// List<TestlaufDurchfuehrung> dbItems = em.createQuery("select tld from
-		// TestlaufDurchfuehrung tld", TestlaufDurchfuehrung.class).getResultList();
 
 		List<TestlaufDurchfuehrung> dbItems = em.createQuery(
 				"""
