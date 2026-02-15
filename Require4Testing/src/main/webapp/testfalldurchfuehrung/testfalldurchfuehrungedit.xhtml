@@ -12,7 +12,7 @@
 		<f:viewParam name="id" value="#{testfallDurchfuehrungEditController.id}" />
 		<f:viewAction action="#{testfallDurchfuehrungEditController.load}" />
 	</f:metadata>
-	<h1>Testfalldurchfuehrung verwalten verwalten</h1>
+	<h1>Testfalldurchfuehrung verwalten</h1>
 
 	<h:form>
 
@@ -22,12 +22,8 @@
 				size="40" />
 
 			<h:outputLabel value="Titel:" for="titel" />
-			<h:inputText id="titel"
+			<h:outputText id="titel"
 				value="#{testfallDurchfuehrungEditController.item.testfall.titel}" size="40" />
-
-			<h:outputLabel value="Ergebnis:" for="ergebnis1" />
-			<h:inputText id="ergebnis1"
-				value="#{testfallDurchfuehrungEditController.item.ergebnis}" size="40" />
 				
 			<h:outputLabel value="Ergebnis:" for="ergebnis" />
 			<p:selectOneMenu id="ergebnis"
