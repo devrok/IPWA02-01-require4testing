@@ -20,12 +20,14 @@
 			<h:outputLabel id="id" value="#{anforderungEditController.item.id}"
 				size="40" />
 
-			<h:outputLabel value="Titel:" for="titel" />
-			<h:inputText id="titel"
-				value="#{anforderungEditController.item.titel}" size="40" />
-
-			<h:outputLabel value="Beschreibung" for="beschreibung" />
-			<h:inputText id="beschreibung"
+			<p:outputLabel value="Titel:" for="titel" />
+			<p:inputText id="titel"
+				value="#{anforderungEditController.item.titel}" size="40"
+				required="true">
+				<f:validateLength minimum="5" />
+			</p:inputText>
+			<p:outputLabel value="Beschreibung" for="beschreibung" />
+			<p:inputText id="beschreibung"
 				value="#{anforderungEditController.item.beschreibung}" size="100" />
 
 		</h:panelGrid>
